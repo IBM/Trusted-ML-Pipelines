@@ -138,50 +138,6 @@ def delete_deployment(params):
     return api_response
 
 
-def get_service_name(params):
-    kfserving_spec = get_kfserving_spec(params)
-    spec_name = get_deployment_name(params)  # kfserving_spec["spec"]["name"])  # 'fashion-mnist'
-    predictor_name = kfserving_spec["spec"]["predictors"][0]["name"]  # 'single-model'
-    graph_name = kfserving_spec["spec"]["predictors"][0]["graph"]["name"]  # 'classifier' (== containers[0].name)
-    pod_name_prefix = "%s-%s-%s" % (spec_name, predictor_name, graph_name)
-    return pod_name_prefix  # 'fashion-mnist-single-model-classifier'
-
-
-def get_deployment_state(params):
-    deployment_name = get_deployment_name(params)
-    spec = get_kfserving_spec(params)
-    group, version = spec["apiVersion"].split("/")
-    namespace = "default"                # TODO: the namespace should be configured or be figured out dynamically
-    plural = spec["kind"].lower() + "s"  # TODO: verify the "rule" for constructing plural
-    api_client = get_custom_objects_api_client()
-    api_response = api_client.list_namespaced_custom_object(group, version, namespace, plural)
-
-    if deployment_name in [deployment["metadata"]["name"] for deployment in api_response["items"]]:
-        deployed_spec = api_client.get_namespaced_custom_object(group, version, namespace, plural, deployment_name)
-        env_list = deployed_spec["spec"]["predictors"][0]["componentSpecs"][0]["spec"]["containers"][0]["env"]
-        env_dict = {var["name"]: var["value"] for var in env_list}
-        deployed_training_id = env_dict["TRAINING_ID"]
-        if params["training_id"] == deployed_training_id and "status" in deployed_spec:
-            return deployed_spec["status"]["state"].upper()  # "CREATING...", "FAILED", ...
-    else:
-        LOG.info("Could not find a kfserving serving deployment with name '%s'" % deployment_name)
-
-    return None
-
-
-def get_deployment_name(params):
-    # DNS-1123 sub-domain must consist of lower case alphanumeric characters (or kfserving will raise an exception)
-    regex = r'^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$'
-    deployment_name = params["deployment_name"]
-    if not re.match(regex, deployment_name):
-        LOG.error("deployment name '%s' does not pass kfserving regex filter '%s'" % (deployment_name, regex))
-        params["deployment_name"] = deployment_name\
-            .replace("_", "-")\
-            .replace(" ", "-")\
-            .lower()
-    return params["deployment_name"]
-
-
 def get_http_method(params):
     # GET    get deployment status
     # POST   create or patch existing deployment
