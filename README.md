@@ -10,25 +10,25 @@ Animesh Singh, Svetlana Levitan, and Tommy Li demonstrate how to build an ML pip
 
 ## Instructions
 ### 1. Create a Jupyter notebook on Watson Studio or on the local machine
-To start with this tutorial, we need to first get an instant of Jupyter notebook running either on the Cloud using Watson Studio or on the local machine. To set it up on Watson Studio, go to https://github.com/IBM/pytorch-on-watson-studio to follow all the steps to learn about how to create a Notebook on Watson Studio and use it to train and test a MNIST PyTorch Model
+To start with this tutorial, we need to first get an instant of Jupyter notebook running either on the Cloud using Watson Studio or on the local machine. To set it up on Watson Studio, visit the [Watson Studio tutorial](https://github.com/IBM/pytorch-on-watson-studio) and follow all the steps to learn about how to create a Notebook on Watson Studio and use it to train with the MNIST PyTorch Model.
 
 ### 2. Run the ART, AIF360, ML Pipeline Notebook
 We will be going over the following three Jupyter notebooks. The first two notebooks will 
-go over the concept behind ART and AIF360. Then the last notebook will create a Machine Learning Pipeline using 
-KubeFlow Pipeline to leveage the concepts we learned from the previous two notebooks as a end to end pipeline scenario. 
+go over the concepts behind Adversarial Robustness Toolbox (ART) and AI Fairness 360 (AIF360). Then the last notebook will create a Machine Learning Pipeline using the open source project,
+KubeFlow Pipeline, to leverage the concepts we learned from the previous two notebooks as an end to end pipeline scenario. 
 
-#### 2.1. ART MNIST Adversarial training
-[This notebook](notebooks/adversarial-training-mnist.ipynb) will use an attack method called fast gradent attack to generate adversarial samples. Then go over the 
-concept of Adversarial training and showcase how this kind of training can better presist the attack from the adversarial samples.
+#### 2.1. ART: MNIST Adversarial training
+[This notebook](notebooks/adversarial-training-mnist.ipynb) will use an attack method called fast gradient attack to generate adversarial samples. Then go over some 
+concepts of Adversarial training and showcase how this kind of training can better persist attacks from adversarial samples.
 
 If you are loading this notebook using Watson Studio, you can load it with the below URL link.
 ```shell
 https://raw.githubusercontent.com/IBM/ML-Pipelines-101/master/notebooks/adversarial-training-mnist.ipynb
 ```
 
-#### 2.2. AIF360 Gender Classification
-[This notebook](notebooks/tutorial_gender_classification.ipynb) will train a Gender Classification using PyTorch. Then it will showcase how AIF360 can detect the bias
-from the dataset and mitigate the dataset using a preprocessing reweighting algorithm.
+#### 2.2. AIF360: Gender Classification
+[This notebook](notebooks/tutorial_gender_classification.ipynb) will train a Gender Classification model using PyTorch. Then it will showcase how AIF360 can detect the bias
+from the dataset and mitigate the dataset using a preprocessing algorithm called reweighting.
 
 If you are loading this notebook using Watson Studio, you can load it with the below URL link.
 ```shell
@@ -36,9 +36,9 @@ https://raw.githubusercontent.com/IBM/ML-Pipelines-101/master/notebooks/tutorial
 ```
 
 #### 2.3. End to End ML Pipeline with Gender Classification
-In [this notebook](notebooks/ml-pipeline.ipynb) we will create a ML Pipeline that trains the PyTorch Gender Classification, the apply the fast gradent attack
-and AIF360 bias detection to generate metrics on this model's robustness and fairness. Then finally it will deploy the model 
-using KFServing which leveages KNative in the background to serve the models in a serverless environment.
+In [this notebook](notebooks/ml-pipeline.ipynb) we will create an End to End Machine Learning Pipeline that preprocesses the data and trains the PyTorch Gender Classification model. Then, it applies the fast gradient attack
+and AIF360 bias detection to generate metrics for this model to evaluate its robustness and fairness. Finally, it will deploy the model 
+using KFServing which leverages KNative in the background to serve models in a serverless environment.
 
 If you are loading this notebook using Watson Studio, you can load it with the below URL link.
 ```shell
