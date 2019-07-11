@@ -10,12 +10,12 @@ Animesh Singh, Svetlana Levitan, and Tommy Li demonstrate how to build an ML pip
 
 ## Instructions
 ### 1. Create a Jupyter notebook on Watson Studio or on the local machine
-To start with this tutorial, we need to first get an instant of Jupyter notebook running either on the Cloud using Watson Studio or on the local machine. 
+To start with this tutorial, we need to first get an instance of Jupyter notebook running either on the Cloud using Watson Studio or on the local machine. 
 
 * To set it up on Watson Studio, visit the [Watson Studio tutorial](https://github.com/IBM/pytorch-on-watson-studio) and follow all the steps to learn about how to create a Notebook on Watson Studio and use it to train with the MNIST PyTorch Model.
 
 * To run it on local Machine, clone this repository and start a local Jupyter Server.
-```
+```shell
 git clone https://github.com/IBM/ML-Pipelines-101.git
 cd ML-Pipelines-101
 jupyter notebook
@@ -53,3 +53,12 @@ If you are using Watson Studio, you can load this notebook with the below URL li
 ```shell
 https://raw.githubusercontent.com/IBM/ML-Pipelines-101/master/notebooks/ml-pipeline.ipynb
 ```
+
+
+## Learn more
+
+- **Adversarial Robustness Toolbox**: https://github.com/IBM/adversarial-robustness-toolbox
+- **AI Fairness 360**: https://github.com/IBM/AIF360
+- **Model Asset Exchange**: https://developer.ibm.com/exchanges/models/
+- **KNative**: https://github.com/knative
+- **KubeFlow**: https://github.com/kubeflow
