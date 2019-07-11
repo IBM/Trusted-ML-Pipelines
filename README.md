@@ -10,7 +10,16 @@ Animesh Singh, Svetlana Levitan, and Tommy Li demonstrate how to build an ML pip
 
 ## Instructions
 ### 1. Create a Jupyter notebook on Watson Studio or on the local machine
-To start with this tutorial, we need to first get an instant of Jupyter notebook running either on the Cloud using Watson Studio or on the local machine. To set it up on Watson Studio, visit the [Watson Studio tutorial](https://github.com/IBM/pytorch-on-watson-studio) and follow all the steps to learn about how to create a Notebook on Watson Studio and use it to train with the MNIST PyTorch Model.
+To start with this tutorial, we need to first get an instant of Jupyter notebook running either on the Cloud using Watson Studio or on the local machine. 
+
+* To set it up on Watson Studio, visit the [Watson Studio tutorial](https://github.com/IBM/pytorch-on-watson-studio) and follow all the steps to learn about how to create a Notebook on Watson Studio and use it to train with the MNIST PyTorch Model.
+
+* To run it on local Machine, clone this repository and start a local Jupyter Server.
+```
+git clone https://github.com/IBM/ML-Pipelines-101.git
+cd ML-Pipelines-101
+jupyter notebook
+```
 
 ### 2. Run the ART, AIF360, ML Pipeline Notebook
 We will be going over the following three Jupyter notebooks. The first two notebooks will 
@@ -37,11 +46,10 @@ https://raw.githubusercontent.com/IBM/ML-Pipelines-101/master/notebooks/tutorial
 
 #### 2.3. End to End ML Pipeline with Gender Classification
 In [this notebook](notebooks/ml-pipeline.ipynb) we will create an End to End Machine Learning Pipeline that preprocesses the data and trains the PyTorch Gender Classification model. Then, it applies the fast gradient attack
-and AIF360 bias detection to generate metrics for this model to evaluate its robustness and fairness. Finally, it will deploy the model 
+and AIF360 bias detection that generate metrics for this model to evaluate its robustness and fairness. Finally, it deploys the model 
 using KFServing which leverages KNative in the background to serve models in a serverless environment.
 
 If you are using Watson Studio, you can load this notebook with the below URL link.
 ```shell
 https://raw.githubusercontent.com/IBM/ML-Pipelines-101/master/notebooks/ml-pipeline.ipynb
 ```
-
