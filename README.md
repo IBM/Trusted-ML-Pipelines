@@ -32,21 +32,12 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
-### 2. Run the ART, AIF360, ML Pipeline Notebook
+### 2. Run the AIF360,ART, ML Pipeline Notebook
 We will be going over the following three Jupyter notebooks. The first two notebooks will 
 go over the concepts behind Adversarial Robustness Toolbox (ART) and AI Fairness 360 (AIF360). Then the last notebook will create a Machine Learning Pipeline using the open source project,
 KubeFlow Pipeline, to leverage the concepts we learned from the previous two notebooks as an end to end pipeline scenario. 
 
-#### 2.1. ART: MNIST Adversarial training
-[This notebook](notebooks/adversarial-training-mnist.ipynb) will use an attack method called fast gradient attack to generate adversarial samples. Then go over some 
-concepts of Adversarial training and showcase how this kind of training can better persist attacks from adversarial samples.
-
-If you are using Watson Studio, you can load this notebook with the below URL link.
-```shell
-https://raw.githubusercontent.com/IBM/ML-Pipelines-101/master/notebooks/adversarial-training-mnist.ipynb
-```
-
-#### 2.2. AIF360: Gender Classification
+#### 2.1. AIF360: Gender Classification
 [This notebook](notebooks/tutorial_gender_classification.ipynb) will train a Gender Classification model using PyTorch. Then it will showcase how AIF360 can detect the bias
 from the dataset and mitigate the dataset using a preprocessing algorithm called reweighting.
 
@@ -55,7 +46,18 @@ If you are using Watson Studio, you can load this notebook with the below URL li
 https://raw.githubusercontent.com/IBM/ML-Pipelines-101/master/notebooks/tutorial_gender_classification.ipynb
 ```
 
-#### 2.3. End to End ML Pipeline with Gender Classification
+#### 2.2. ART: MNIST Adversarial training
+[This notebook](notebooks/adversarial-training-mnist.ipynb) will use an attack method called fast gradient attack to generate adversarial samples. Then go over some 
+concepts of Adversarial training and showcase how this kind of training can better persist attacks from adversarial samples.
+
+If you are using Watson Studio, you can load this notebook with the below URL link.
+```shell
+https://raw.githubusercontent.com/IBM/ML-Pipelines-101/master/notebooks/adversarial-training-mnist.ipynb
+```
+
+
+
+#### 2.3. End to End ML Pipeline with Gender Classification (using WML, AIF360, ART, Kubeflow Pipeline and Kubeflow Serving) 
 In [this notebook](notebooks/ml-pipeline.ipynb) we will create an End to End Machine Learning Pipeline that preprocesses the data and trains the PyTorch Gender Classification model. Then, it applies the fast gradient attack
 and AIF360 bias detection that generate metrics for this model to evaluate its robustness and fairness. Finally, it deploys the model 
 using KFServing which leverages KNative in the background to serve models in a serverless environment.
