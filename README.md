@@ -5,11 +5,11 @@ Animesh Singh, Svetlana Levitan, Tommy Li, Romeo Kienzler demonstrate how to bui
 
 Key Open Source Projects Used:
 
-AI Fairness 360: https://github.com/IBM/AIF360
-Adversarial Robustness Toolbox: https://github.com/IBM/adversarial-robustness-toolbox
-Model Asset Exchange: https://developer.ibm.com/exchanges/models/
-KubeFlow Pipelines: https://github.com/kubeflow/pipelines
-Kubeflow Serving: https://github.com/kubeflow/kfserving
+* AI Fairness 360: https://github.com/IBM/AIF360
+* Adversarial Robustness Toolbox: https://github.com/IBM/adversarial-robustness-toolbox
+* Model Asset Exchange: https://developer.ibm.com/exchanges/models/
+* KubeFlow Pipelines: https://github.com/kubeflow/pipelines
+* Kubeflow Serving: https://github.com/kubeflow/kfserving
 
 ## Get Started 
 If you have a notebook server, you can run notebooks locally for AIF360 and ART. For running the Pipelines notebook, you will need to sign up on IBM Cloud, as it requires a Cloud environment and Object Storage access.
