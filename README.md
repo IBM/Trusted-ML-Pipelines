@@ -1,9 +1,19 @@
 # Building a secure and transparent ML pipeline using open source technologies
 The application of AI algorithms in domains such as criminal justice, credit scoring, and hiring holds unlimited promise. At the same time, it raises legitimate concerns about algorithmic fairness. There’s a growing demand for fairness, accountability, and transparency from ML systems. And we need to remember that training data isn’t the only source of possible bias and adversarial contamination. It can also be introduced through inappropriate data handling, inappropriate model selection, or incorrect algorithm design. We need a pipeline that’s open, transparent, secure, and fair, and that fully integrates into the AI lifecycle. Such a pipeline requires a robust set of bias and adversarial checkers, debiasing and defense algorithms, and explanations.
 
-Animesh Singh, Svetlana Levitan, and Tommy Li demonstrate how to build an ML pipeline that’s open, secure, and fair and that fully integrates into the AI lifecycle, using open source tools like AIF360, ART, Model Asset Exchange (MAX).
+Animesh Singh, Svetlana Levitan, Tommy Li, Romeo Kienzler demonstrate how to build an ML pipeline that’s open, secure, and fair and that fully integrates into the AI lifecycle, using open source tools like AIF360, ART, Kubeflow, Model Asset Exchange (MAX) etc.
+
+Key Open Source Projects Used:
+
+AI Fairness 360: https://github.com/IBM/AIF360
+Adversarial Robustness Toolbox: https://github.com/IBM/adversarial-robustness-toolbox
+Model Asset Exchange: https://developer.ibm.com/exchanges/models/
+KubeFlow Pipelines: https://github.com/kubeflow/pipelines
+Kubeflow Serving: https://github.com/kubeflow/kfserving
 
 ## Get Started 
+If you have a notebook server, you can run notebooks locally for AIF360 and ART. For running the Pipelines notebook, you will need to sign up on IBM Cloud, as it requires a Cloud environment and Object Storage access.
+
 - Sign up for free IBM Cloud account: http://ibm.biz/oscon2019
 - Watson Studio:  https://dataplatform.cloud.ibm.com/
 
@@ -54,12 +64,3 @@ If you are using Watson Studio, you can load this notebook with the below URL li
 ```shell
 https://raw.githubusercontent.com/IBM/ML-Pipelines-101/master/notebooks/ml-pipeline.ipynb
 ```
-
-
-## Learn more
-
-- **Adversarial Robustness Toolbox**: https://github.com/IBM/adversarial-robustness-toolbox
-- **AI Fairness 360**: https://github.com/IBM/AIF360
-- **Model Asset Exchange**: https://developer.ibm.com/exchanges/models/
-- **KNative**: https://github.com/knative
-- **KubeFlow**: https://github.com/kubeflow
