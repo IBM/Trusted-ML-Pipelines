@@ -1,0 +1,4 @@
+ibm-cos-sdk
+requests
+numpy
+Pillow

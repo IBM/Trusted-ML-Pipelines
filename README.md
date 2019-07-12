@@ -18,6 +18,7 @@ To start with this tutorial, we need to first get an instance of Jupyter noteboo
 ```shell
 git clone https://github.com/IBM/ML-Pipelines-101.git
 cd ML-Pipelines-101
+pip install -r requirements.txt
 jupyter notebook
 ```
 
