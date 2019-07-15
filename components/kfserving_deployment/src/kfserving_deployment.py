@@ -28,7 +28,7 @@ if __name__ == "__main__":
     parser.add_argument('--model_id', type=str, help='Training model id', default="training-dummy")
     parser.add_argument('--metric_path', type=str, help='Path for deployment output', default="/tmp/log.txt")
     parser.add_argument('--cleanup', type=bool, help='Cleanup previous model deployments', default=False)
-    parser.add_argument('--model_serving_image', type=str, help='Model serving container image', default="tomcli/,:pytorch")
+    parser.add_argument('--model_serving_image', type=str, help='Model serving container image', default="tomcli/knative-serving:pytorch")
     parser.add_argument('--deployment_name', type=str, help='Model Deployment Name', default='model-serving')
     parser.add_argument('--model_class_name', type=str, help='PyTorch model class name', default='ModelClass')
     parser.add_argument('--model_file_name', type=str, help='Model binary filename', default='model.pt')
