@@ -37,6 +37,8 @@ We will be going over the following three Jupyter notebooks. The first two noteb
 go over the concepts behind Adversarial Robustness Toolbox (ART) and AI Fairness 360 (AIF360). Then the last notebook will create a Machine Learning Pipeline using the open source project,
 KubeFlow Pipeline, to leverage the concepts we learned from the previous two notebooks as an end to end pipeline scenario. 
 
+If you are using Watson Studio, we recommend to use runtime `Default Python 3.6 S (4 vCPU and 16 GB RAM)`.
+
 #### 2.1. AIF360: Gender Classification
 [This notebook](notebooks/tutorial_gender_classification.ipynb) will train a Gender Classification model using PyTorch. Then it will showcase how AIF360 can detect the bias
 from the dataset and mitigate it in the dataset using a preprocessing algorithm called reweighting.
