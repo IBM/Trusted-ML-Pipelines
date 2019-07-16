@@ -62,9 +62,16 @@ To run locally use the notebook `adversarial-training-mnist.ipynb`
 #### 2.3. End to End ML Pipeline with Gender Classification (using WML, AIF360, ART, Kubeflow Pipeline and Kubeflow Serving) 
 In [this notebook](notebooks/ml-pipeline.ipynb) we will create an End to End Machine Learning Pipeline that preprocesses the data and trains the PyTorch Gender Classification model. Then, it applies the fast gradient attack
 and AIF360 bias detection that generate metrics for this model to evaluate its robustness and fairness. Finally, it deploys the model 
-using KFServing which leverages KNative in the background to serve models in a serverless environment.
+using KFServing which leverages Knative in the background to serve models in a serverless environment.
 
 You can load this notebook into Watson Studio with the below URL link.
 ```shell
 https://raw.githubusercontent.com/IBM/Trusted-ML-Pipelines/master/notebooks/ml-pipeline.ipynb
 ```
+
+### 3. (Optional) Advanced deep learning models for app developers
+If you are interested in how to create and use open source deep learning models for app developers, you can use the below workshop to learn more about how to wrap models into container, using TensorFlowJS and NodeRed.
+https://github.com/CODAIT/max-workshop-oscon-2019
+
+Due to the limitation of network connectivity on the workshop, you can use the below link to try out the object-dector models API.
+http://max-object-detector.max.us-south.containers.appdomain.cloud/
