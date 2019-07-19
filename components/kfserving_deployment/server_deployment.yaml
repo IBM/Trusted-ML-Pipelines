@@ -14,37 +14,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kfserving-deploy-controller
+  name: kfserving-canary-controller
   labels:
-    app: kfserving-deploy-controller
+    app: kfserving-canary-controller
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kfserving-deploy-controller
+      app: kfserving-canary-controller
   template:
     metadata:
       labels:
-        app: kfserving-deploy-controller
+        app: kfserving-canary-controller
     spec:
       serviceAccountName: default-admin
       containers:
-      - name: kfserving-deploy-controller
+      - name: kfserving-canary-controller
         imagePullPolicy: Always
-        image: aipipeline/deployment-kfserving-remote
+        image: tomcli/canary-kfserving:custom
         ports:
         - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: kfserving-deploy-controller
+  name: kfserving-canary-controller
   labels:
-    app: kfserving-deploy-controller
+    app: kfserving-canary-controller
 spec:
   ports:
     - port: 8080
       targetPort: 8080
   selector:
-    app: kfserving-deploy-controller
+    app: kfserving-canary-controller
   type: NodePort

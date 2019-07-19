@@ -65,13 +65,15 @@ def update_kfserving_spec(params):
 
     spec["metadata"]["name"] = params["deployment_name"]
 
+    # Set canary canary_percentage
+    spec["spec"]["canaryTrafficPercent"] = params["canary_percentage"]
+
+    # Set default model specs
     env_list = spec["spec"]["default"]["custom"]["container"]["env"]
     env_dict = {var["name"]: var["value"] for var in env_list}
 
-    if "model_file_name" in params:
-        env_dict["MODEL_FILE_NAME"] = params["model_file_name"]
-    if "training_id" in params:
-        env_dict["TRAINING_ID"] = params["training_id"]
+    if "default_model_file" in params:
+        env_dict["MODEL_FILE_NAME"] = params["default_model_file"]
     if "training_results_bucket" in params:
         env_dict["BUCKET_NAME"] = params["training_results_bucket"]
     if "endpoint_url" in params:
@@ -84,9 +86,35 @@ def update_kfserving_spec(params):
         env_dict["MODEL_CLASS_NAME"] = params['model_class_name']
     if "model_class_file" in params:
         env_dict["MODEL_CLASS_FILE"] = params['model_class_file']
+    if "model_id" in params:
+        env_dict["TRAINING_ID"] = params['model_id']
 
     env_updated = [{"name": key, "value": value} for key, value in env_dict.items()]
     spec["spec"]["default"]["custom"]["container"]["env"] = env_updated
+
+    # Set Canary model specs
+    env_list = spec["spec"]["canary"]["custom"]["container"]["env"]
+    env_dict = {var["name"]: var["value"] for var in env_list}
+
+    if "canary_model_file" in params:
+        env_dict["MODEL_FILE_NAME"] = params["canary_model_file"]
+    if "training_results_bucket" in params:
+        env_dict["BUCKET_NAME"] = params["training_results_bucket"]
+    if "endpoint_url" in params:
+        env_dict["BUCKET_ENDPOINT_URL"] = params["endpoint_url"]
+    if "access_key_id" in params:
+        env_dict["BUCKET_KEY"] = params['access_key_id']
+    if "secret_access_key" in params:
+        env_dict["BUCKET_SECRET"] = params['secret_access_key']
+    if "model_class_name" in params:
+        env_dict["MODEL_CLASS_NAME"] = params['model_class_name']
+    if "model_class_file" in params:
+        env_dict["MODEL_CLASS_FILE"] = params['model_class_file']
+    if "model_id" in params:
+        env_dict["TRAINING_ID"] = params['model_id']
+
+    env_updated = [{"name": key, "value": value} for key, value in env_dict.items()]
+    spec["spec"]["canary"]["custom"]["container"]["env"] = env_updated
 
     return spec
 

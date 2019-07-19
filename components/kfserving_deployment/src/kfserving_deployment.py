@@ -26,24 +26,30 @@ def get_secret(path):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_id', type=str, help='Training model id', default="training-dummy")
+    parser.add_argument('--canary_percentage', type=int, help='percentage of canary traffic that route to the new version of the model', default=5)
     parser.add_argument('--metric_path', type=str, help='Path for deployment output', default="/tmp/log.txt")
     parser.add_argument('--cleanup', type=bool, help='Cleanup previous model deployments', default=False)
-    parser.add_argument('--model_serving_image', type=str, help='Model serving container image', default="tomcli/knative-serving:pytorch")
+    parser.add_argument('--model_serving_image', type=str, help='Model serving container image', default="tomcli/model-serving:pytorch")
     parser.add_argument('--deployment_name', type=str, help='Model Deployment Name', default='model-serving')
+    parser.add_argument('--default_model_file', type=str, help='Default model binary filename', default='mnist_cnn_original.h5')
+    parser.add_argument('--canary_model_file', type=str, help='Canary model binary filename', default='mnist_cnn_robust.h5')
     parser.add_argument('--model_class_name', type=str, help='PyTorch model class name', default='ModelClass')
-    parser.add_argument('--model_file_name', type=str, help='Model binary filename', default='model.pt')
     parser.add_argument('--model_class_file', type=str, help='File that contains the PyTorch model class', default='model_class.py')
 
     args = parser.parse_args()
 
-    model_id = args.model_id
     metric_path = args.metric_path
     cleanup = args.cleanup
+    canary_percentage = args.canary_percentage
+    deployment_name = args.deployment_name
+    default_model_file = args.default_model_file
     model_serving_image = args.model_serving_image
+    canary_model_file = args.canary_model_file
     model_class_name = args.model_class_name
     model_class_file = args.model_class_file
-    deployment_name = args.deployment_name
-    model_file_name = args.model_file_name
+    model_id = args.model_id
+    kiali_url = "169.63.38.234:32645"
+
     namespace = "default"  # TODO: Parametize namespace when kubeflow supports user auth.
 
     s3_url = get_secret("/app/secrets/s3_url")
@@ -51,6 +57,7 @@ if __name__ == "__main__":
     s3_username = get_secret("/app/secrets/s3_access_key_id")
     s3_password = get_secret("/app/secrets/s3_secret_access_key")
     knative_ingress = get_secret("/app/secrets/knative_ingress")
+
 
     try:
         local_cluster_deployment = str(get_secret("/app/secrets/local_cluster_deployment").lower()) == 'true'
@@ -70,16 +77,18 @@ if __name__ == "__main__":
     # Model Deployment parameters
     formData = {
         "deployment_name": deployment_name,
-        "container_image": model_serving_image,
-        "model_file_name": model_file_name,
         "check_status_only": False,
-        "model_class_name": model_class_name,
-        "model_class_file": model_class_file,
         "endpoint_url": s3_url,
         "access_key_id": s3_username,
         "secret_access_key": s3_password,
         "training_results_bucket": bucket_name,
-        "training_id": model_id,
+        "canary_percentage": canary_percentage,
+        "container_image": model_serving_image,
+        "default_model_file": default_model_file,
+        "canary_model_file": canary_model_file,
+        "model_class_name": model_class_name,
+        "model_class_file": model_class_file,
+        "model_id": model_id
     }
 
     # Deploy model with Knative route.
@@ -107,6 +116,7 @@ if __name__ == "__main__":
         metrics.pop('details', None)
 
         print("\n\nEndpoint IP for these models: " + metrics['Prediction_Endpoint'] + " . Model prediction host is " + metrics['Prediction_Host'])
+        print("\n\nKiali Endpoint for these models: http://" + kiali_url + "/kiali/console/graph/namespaces/?edges=requestsPercentage&graphType=versionedApp&namespaces=default&injectServiceNodes=true&duration=60&pi=10000&layout=dagre")
 
     with open(metric_path, "w") as report:
         report.write(json.dumps(metrics))
