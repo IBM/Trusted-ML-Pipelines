@@ -16,7 +16,6 @@ library(keras)
 
 max_features <- 10000
 maxlen <- 500
-batch_size <- 32
 
 imdb <- dataset_imdb(num_words = max_features)
 c(c(input_train, y_train), c(input_test, y_test)) %<-% imdb 
@@ -40,13 +39,13 @@ model %>% compile(
   metrics = c("acc")
 )
 
+summary(model)
+
 history <- model %>% fit(
   input_train, y_train,
   epochs = 10,
   batch_size = 128,
   validation_split = 0.2
 )
-
-summary(model)
 
 history$metrics
