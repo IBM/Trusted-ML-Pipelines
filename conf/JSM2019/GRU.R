@@ -40,13 +40,13 @@ model %>% compile(
   metrics = c("acc")
 )
 
+summary(model)
+
 history <- model %>% fit(
   input_train, y_train,
   epochs = 10,
   batch_size = 128,
   validation_split = 0.2
 )
-
-summary(model)
 
 history$metrics
